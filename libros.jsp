@@ -80,4 +80,8 @@ out.write("OK");
 %>
 <br>
 <a href="listado-csv.jsp" download="libros.csv">Descargar listado excel</a>
+<a href="listado-txt.jsp" download="libros.txt">Descargar listado txt</a>
+<a href="listado-xml.jsp" download="libros.xml">Descargar listado xml</a>
+<a href="listado-html.jsp" download="libros.html">Descargar listado en formato html</a>
+<a href="listado-json.jsp" download="libros.json">Descargar listado json</a>
  </body>
