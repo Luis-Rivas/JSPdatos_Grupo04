@@ -10,14 +10,38 @@
 <form action="matto.jsp" method="post" name="Actualizar">
  <table>
  <tr>
- <td>ISBN<input type="text" name="isbn" value="" size="40"/>
-</td>
-  </tr>
- <tr>
- <td>T�tulo<input type="text" name="titulo" value="" size="50"/></td>
- 
+ <td>ISBN<input type="text" name="isbn" value="" size="40"/></td>
  </tr>
- <tr><td> Action <input type="radio" name="Action" value="Actualizar" /> Actualizar
+ <tr>
+ <td>Titulo<input type="text" name="titulo" value="" size="50"/></td>
+ </tr>
+ <tr>
+ <td>Anio<input type="text" name="anio" value="" size="30"/></td>
+ </tr>
+ <%
+ ServletContext contexto = request.getServletContext();
+ String patho = contexto.getRealPath("/data");
+ Connection conexione = getConnection(patho);
+    if (!conexione.isClosed()){
+ out.write("OK");
+       Statement st1 = conexione.createStatement();
+       ResultSet edi = st1.executeQuery("select * from editorial" );
+ 
+       out.println("<td> Editoriales");
+       out.println("<select name=\"item\">");
+          while (edi.next())
+       {
+          out.println("<option>"+edi.getString("nombre")+"</option>");  
+       }
+       out.println("</select>");
+       out.println("</td>");
+       // cierre de la conexion
+       conexione.close();
+ }
+ %>
+
+ <tr>
+   <td> Action <input type="radio" name="Action" value="Actualizar" /> Actualizar
  <input type="radio" name="Action" value="Eliminar" /> Eliminar
  <input type="radio" name="Action" value="Crear" checked /> Crear
   </td>
@@ -25,6 +49,7 @@
 </td>
  </tr>
  </form>
+
  </tr>
  </table>
  </form>
@@ -59,7 +84,7 @@ out.write("OK");
       ResultSet rs = st.executeQuery("select * from libros" );
 
       // Ponemos los resultados en un table de html
-      out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Acci�n</td></tr>");
+      out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Accion</td><td>Anio</td><td>Editorial</td></tr>");
       int i=1;
       while (rs.next())
       {
@@ -68,6 +93,8 @@ out.write("OK");
          out.println("<td>"+rs.getString("isbn")+"</td>");
          out.println("<td>"+rs.getString("titulo")+"</td>");
          out.println("<td>"+"Actualizar<br>Eliminar"+"</td>");
+         out.println("<td>"+rs.getString("anio")+"</td>");
+         out.println("<td>"+rs.getString("editorial")+"</td>");
          out.println("</tr>");
          i++;
       }
@@ -76,6 +103,5 @@ out.write("OK");
       // cierre de la conexion
       conexion.close();
 }
-
 %>
  </body>
