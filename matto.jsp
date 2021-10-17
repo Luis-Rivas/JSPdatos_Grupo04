@@ -8,6 +8,7 @@ String ls_titulo = request.getParameter("titulo");
 String ls_anio = request.getParameter("anio");
 String ls_action = request.getParameter("Action");
 String ls_editorial = request.getParameter("item");
+String ls_autor = request.getParameter("autor");
  
 /* Paso 2) Inicializar variables */
 String ls_result = "Base de datos actualizada...";
@@ -28,16 +29,19 @@ ls_query += "'" + ls_isbn + "',";
 ls_query += "'" + ls_titulo + "',";
 ls_query += "'" + ls_anio + "',";
 ls_query += "'" + ls_editorial + "')";
+ls_query += "'" + ls_autor + "')";
 }
  
 if (ls_action.equals("Eliminar")) {
 ls_query = " delete from libros where isbn = ";
 ls_query += "'" + ls_isbn + "'";
+ls_query += "'" + ls_autor + "'";
 }
  
 if (ls_action.equals("Actualizar")) {
 ls_query = " update libros";
 ls_query += " set titulo= " + "'" + ls_titulo + "'"+","+"anio="+ "'" + ls_anio + "'"+","+"editorial="+ "'" + ls_editorial + "'";
+ls_query += " , autor = " + "'" + ls_autor + "'";
 ls_query += " where isbn = " + "'" + ls_isbn + "'";
 
 }

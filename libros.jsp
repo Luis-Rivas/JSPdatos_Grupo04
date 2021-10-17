@@ -16,6 +16,9 @@
  <td>Titulo<input type="text" name="titulo" value="" size="50"/></td>
  </tr>
  <tr>
+   <td>Autor<input type="text" name="autor" value="" size="50"/></td>
+</tr>
+ <tr>
  <td>Anio<input type="text" name="anio" value="" size="30"/></td>
  </tr>
  <%
@@ -84,7 +87,7 @@ out.write("OK");
       ResultSet rs = st.executeQuery("select * from libros" );
 
       // Ponemos los resultados en un table de html
-      out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Accion</td><td>Anio</td><td>Editorial</td></tr>");
+      out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Accion</td><td>Anio</td><td>Editorial</td></tr>");
       int i=1;
       while (rs.next())
       {
@@ -92,9 +95,10 @@ out.write("OK");
          out.println("<td>"+ i +"</td>");
          out.println("<td>"+rs.getString("isbn")+"</td>");
          out.println("<td>"+rs.getString("titulo")+"</td>");
+         out.println("<td>"+rs.getString("autor")+"</td>");
          out.println("<td>"+"Actualizar<br>Eliminar"+"</td>");
          out.println("<td>"+rs.getString("anio")+"</td>");
-         out.println("<td>"+rs.getString("editorial")+"</td>");
+         out.println("<td>"+rs.getString("editorial")+"</td>");         
          out.println("</tr>");
          i++;
       }

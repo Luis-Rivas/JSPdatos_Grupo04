@@ -17,11 +17,11 @@
         ResultSet rs = st.executeQuery("select * from libros" );
 
       // Se imprimen los resultados
-        out.println("N  \tISBN  \tNOMBRE");
+        out.println("N  \tISBN  \tNOMBRE  \AUTOR");
         int i=1;
       while (rs.next()){
           
-         out.println(i+"    \t"+rs.getString("isbn")+"  \t"+rs.getString("titulo"));
+         out.println(i+"    \t"+rs.getString("isbn")+"  \t"+rs.getString("titulo")  \t"+rs.getString("autor"));
 
          i++;
       }
