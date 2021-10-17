@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="iso-8859-1" import="java.sql.*,net.ucanaccess.jdbc.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.sql.*,net.ucanaccess.jdbc.*" %>
  <html>
  <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -134,7 +134,7 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
    //out.print("<h2>Contenido del formulario: "+ls_isbn+"</h2>");
    //out.print("<h3>"+consulta+"</h3>");
    // Ponemos los resultados en un table de html
-   out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Anio</td><td>Editorial</td><td>Accion</td></tr>");
+   out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
    int i=1;
    while(rs.next()){
       out.println("<tr>");
@@ -157,7 +157,7 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
       ResultSet rs = st.executeQuery("select * from libros" );
 
       // Ponemos los resultados en un table de html
-      out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Anio</td><td>Editorial</td><td>Accion</td></tr>");
+      out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
       int i=1;
       while (rs.next()){
          out.println("<tr>");
