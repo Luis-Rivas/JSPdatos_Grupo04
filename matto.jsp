@@ -23,19 +23,19 @@ String ls_dbdriver = "sun.jdbc.odbc.JdbcOdbcDriver";
  
 /* Paso 3) Crear query&nbsp; */
 if (ls_action.equals("Crear")) {
-ls_query = " insert into libros (isbn, titulo, anio, editorial)";
+ls_query = " insert into libros (isbn, titulo, anio, editorial,autor)";
 ls_query += " values (";
 ls_query += "'" + ls_isbn + "',";
 ls_query += "'" + ls_titulo + "',";
 ls_query += "'" + ls_anio + "',";
-ls_query += "'" + ls_editorial + "')";
+ls_query += "'" + ls_editorial + "',";
 ls_query += "'" + ls_autor + "')";
 }
  
 if (ls_action.equals("Eliminar")) {
 ls_query = " delete from libros where isbn = ";
 ls_query += "'" + ls_isbn + "'";
-ls_query += "'" + ls_autor + "'";
+//ls_query += "'" + ls_autor + "'";
 }
  
 if (ls_action.equals("Actualizar")) {
