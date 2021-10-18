@@ -12,11 +12,11 @@
  
         Statement st = conexion.createStatement();
         ResultSet rs = st.executeQuery("select * from libros" );
-        out.println("N \tISBN \t\tNOMBRE");
+        out.println("{Numero, isbn, Titulo, Autor, Año de publicación, Editorial}\n");
         int i=1;
       while (rs.next()){
           
-         out.println(i+"    \t"+rs.getString("isbn")+"  \t"+rs.getString("titulo"));
+         out.println("{"+i+", "+rs.getString("isbn")+", "+rs.getString("titulo")+", "+rs.getString("autor")+", "+rs.getString("anio")+", "+rs.getString("editorial")+"}\n");
 
          i++;
       }
@@ -47,3 +47,4 @@ System.out.println("Error: " + e);
     return conn;
 }
 %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>

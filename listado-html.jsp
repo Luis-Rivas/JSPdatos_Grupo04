@@ -36,7 +36,7 @@ System.out.println("Error: " + e);
         ResultSet rs = st.executeQuery("select * from libros" );
 
       // Se imprimen los resultados
-      out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td></tr>");
+      out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td></tr>");
       int i=1;
       while (rs.next())
       {
@@ -44,6 +44,9 @@ System.out.println("Error: " + e);
          out.println("<td>"+ i +"</td>");
          out.println("<td>"+rs.getString("isbn")+"</td>");
          out.println("<td>"+rs.getString("titulo")+"</td>");
+         out.println("<td>"+rs.getString("autor")+"</td>");
+         out.println("<td>"+rs.getString("anio")+"</td>");
+         out.println("<td>"+rs.getString("editorial")+"</td>");
          out.println("</tr>");
          i++;
       }

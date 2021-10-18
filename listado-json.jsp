@@ -22,7 +22,10 @@
          out.println("{");
          out.println("\"numero\":"+"\""+i+"\",");
          out.println("\"isbn\":"+"\""+rs.getString("isbn")+"\",");
-         out.println("\"nombre\":"+"\""+rs.getString("titulo")+"\"");
+         out.println("\"nombre\":"+"\""+rs.getString("titulo")+"\",");
+         out.println("\"autor\":"+"\""+rs.getString("autor")+"\",");
+         out.println("\"año\":"+"\""+rs.getString("anio")+"\",");
+         out.println("\"editorial\":"+"\""+rs.getString("editorial")+"\"");
          out.print("}");
          i++;
       }
@@ -54,3 +57,4 @@ System.out.println("Error: " + e);
     return conn;
 }
 %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>

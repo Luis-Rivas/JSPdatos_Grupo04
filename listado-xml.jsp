@@ -17,6 +17,9 @@
           out.println("<numero>"+i+"</numero>");
           out.println("<isbn>"+rs.getString("isbn")+"</isbn>");
           out.println("<nombre>"+rs.getString("titulo")+"</nombre>");
+          out.println("<autor>"+rs.getString("autor")+"</autor>");
+          out.println("<año>"+rs.getString("anio")+"</año>");
+          out.println("<editorial>"+rs.getString("editorial")+"</editorial>");
           out.println("</libro>");
          i++;
       }
@@ -47,3 +50,4 @@ System.out.println("Error: " + e);
     return conn;
 }
 %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
