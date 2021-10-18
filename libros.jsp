@@ -3,12 +3,13 @@
  <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>Actualizar, Eliminar, Crear registros.</title>
+ <link rel="stylesheet" type="text/css" href="estilo.css">
  </head>
  <body>
 
 <H1>MANTENIMIENTO DE LIBROS</H1>
-<form action="matto.jsp" method="post" name="Actualizar">
- <table>
+<form action="matto.jsp" class="formagre" method="post" name="Actualizar">
+ <table class="table__agregar">
  <tr>
  <td>ISBN<input type="text" name="isbn" value="" size="40"/></td>
  </tr>
@@ -51,18 +52,23 @@
  <td><input type="SUBMIT" value="ACEPTAR" />
 </td>
  </tr>
- </form>
  </tr>
  </table>
  </form>
 <br><br>
 <!--Agregando el formulario de busqueda-->
-<form name="formbusca" action="libros.jsp" method="get">
+<form name="formbusca" class="formbus" action="libros.jsp" method="get">
+<p>
+   <label>BUSCAR LIBRO</label>
+</p>
+ 
 Titulo a buscar: <input type="text" name="titulo" placeholder="ingrese un titulo" id="txtBuscarTitulo" onInput="validarInput()"/> 
 ISBN :<input type="text" name="isbn" placeholder="ingrese isbn" id="txtBuscarIsbn" onInput="validarInput()"/> 
 Autor:<input type= "text" name="autor" id="txtBuscarAutor" placeholder="ingrese el autor" onInput="validarInput()"/>
+<div>
 <input type="SUBMIT" name="buscar" value="BUSCAR" id="btnBuscar" disabled/>
 <input type="SUBMIT" name="todos" value="Ver Todos" id="mostrar todos" onclick="mostrarTodos()" /><!--Boton para mostrar todos los libros-->
+</div>
 </form>
 <!--Script para validar que los campos de busqueda no estés todos vacíos-->
 <script>     
@@ -134,18 +140,18 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
    //out.print("<h2>Contenido del formulario: "+ls_isbn+"</h2>");
    //out.print("<h3>"+consulta+"</h3>");
    // Ponemos los resultados en un table de html
-   out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
+   out.println("<table border=\"1\" class=\"table__a\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
    int i=1;
    while(rs.next()){
-      out.println("<tr>");
-      out.println("<td>"+ i +"</td>");
-      out.println("<td>"+rs.getString("isbn")+"</td>");
-      out.println("<td>"+rs.getString("titulo")+"</td>");
-      out.println("<td>"+rs.getString("autor")+"</td>");
-      out.println("<td>"+rs.getString("anio")+"</td>");
-      out.println("<td>"+rs.getString("editorial")+"</td>");
-      out.println("<td>"+"Actualizar<br>Eliminar"+"</td>");
-      out.println("</tr>");
+      out.println("<tr class=\"tr_especial\">");
+      out.println("<td class=\"td_especial\">"+ i +"</td>");
+      out.println("<td class=\"td_especial\">"+rs.getString("isbn")+"</td>");
+      out.println("<td class=\"td_especial\">"+rs.getString("titulo")+"</td>");
+      out.println("<td class=\"td_especial\">"+rs.getString("autor")+"</td>");
+      out.println("<td class=\"td_especial\">"+rs.getString("anio")+"</td>");
+      out.println("<td class=\"td_especial\">"+rs.getString("editorial")+"</td>");
+      out.println("<td class=\"td_especial\">"+"Actualizar<br>Eliminar"+"</td>");
+      out.println("</tr class=\"tr_especial\">>");
       i++;
    }
    out.println("</table>");
@@ -157,18 +163,18 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
       ResultSet rs = st.executeQuery("select * from libros" );
 
       // Ponemos los resultados en un table de html
-      out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
+      out.println("<table border=\"1\" class=\"table__a\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
       int i=1;
-      while (rs.next()){
-         out.println("<tr>");
-         out.println("<td>"+ i +"</td>");
-         out.println("<td>"+rs.getString("isbn")+"</td>");
-         out.println("<td>"+rs.getString("titulo")+"</td>");
-         out.println("<td>"+rs.getString("autor")+"</td>");
-         out.println("<td>"+rs.getString("anio")+"</td>");
-         out.println("<td>"+rs.getString("editorial")+"</td>");
-         out.println("<td>"+"Actualizar<br>Eliminar"+"</td>");         
-         out.println("</tr>");
+      while(rs.next()){
+         out.println("<tr class=\"tr_especial\">");
+         out.println("<td class=\"td_especial\">"+ i +"</td>");
+         out.println("<td class=\"td_especial\">"+rs.getString("isbn")+"</td>");
+         out.println("<td class=\"td_especial\">"+rs.getString("titulo")+"</td>");
+         out.println("<td class=\"td_especial\">"+rs.getString("autor")+"</td>");
+         out.println("<td class=\"td_especial\">"+rs.getString("anio")+"</td>");
+         out.println("<td class=\"td_especial\">"+rs.getString("editorial")+"</td>");
+         out.println("<td class=\"td_especial\">"+"Actualizar<br>Eliminar"+"</td>");
+         out.println("</tr class=\"tr_especial\">>");
          i++;
       }
       out.println("</table>");
@@ -179,9 +185,11 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
 }
 %>
 <br>
-<a href="listado-csv.jsp" download="libros.csv">Descargar listado excel</a>
-<a href="listado-txt.jsp" download="libros.txt">Descargar listado txt</a>
-<a href="listado-xml.jsp" download="libros.xml">Descargar listado xml</a>
-<a href="listado-html.jsp" download="libros.html">Descargar listado en formato html</a>
-<a href="listado-json.jsp" download="libros.json">Descargar listado json</a>
+<div class="links">
+<a href="listado-csv.jsp" download="libros.csv">Descargar listado excel |</a>
+<a href="listado-txt.jsp" download="libros.txt">Descargar listado txt |</a>
+<a href="listado-xml.jsp" download="libros.xml">Descargar listado xml |</a>
+<a href="listado-html.jsp" download="libros.html">Descargar listado en formato html |</a>
+<a href="listado-json.jsp" download="libros.json">Descargar listado json |</a>
+</div>
  </body>

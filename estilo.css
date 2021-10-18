@@ -1,0 +1,48 @@
+body{
+    background-color:palegoldenrod;
+}
+
+H1{
+    text-align: center;
+    background-color:brown;
+    border-style: double;
+
+}
+.table__a{
+    border-collapse: separate;
+    border-spacing: 3px;
+    background: #000 ;
+    color: #fff;
+ }
+
+ .td_especial, .th_especial { 
+    background: #fff;
+    color: #000;
+ }
+
+ .formbus{
+     text-align: center;
+     background-color:chocolate;
+     border-radius: 1cm;
+ }
+
+ label{
+     color:ghostwhite;
+     font-family:'Times New Roman'; 
+     font-size: 20pt;
+    }
+
+    .table__agregar{
+    
+     background-color: chocolate;
+     border-radius: 0.5cm;
+     }
+
+     .links{
+         background-color: brown;
+         text-align: center;
+     }
+
+     a{
+         color: black;
+     }
