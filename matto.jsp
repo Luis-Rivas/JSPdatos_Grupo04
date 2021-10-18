@@ -79,9 +79,13 @@ ls_result += " <br/>" + e.toString();
 html>
 <html>
 <head><title>Updating a Database</title></head>
-<body>
+<link rel="stylesheet" type="text/css" href="estilo.css">
+<body class="matto">
+ <p class="resultado">
+
  
 La siguiente instrucci�n fue ejecutada:
+
 <br/><br/>
 <%=ls_query%>
 <br/><br/>
@@ -90,7 +94,9 @@ El resultado fue:
 <br/><br/>
 <%=ls_result%>
 <br/><br/>
- 
+</p>
+<div class="links">
 <a href="libros.jsp">Entre otro valor</a>
+</div>
 </body>
 </html>

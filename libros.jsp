@@ -8,19 +8,19 @@
  <body>
 
 <H1>MANTENIMIENTO DE LIBROS</H1>
-<form action="matto.jsp" class="formagre" method="post" name="Actualizar">
+<form action="matto.jsp" class="formagre" id="formCrear" method="post" name="Actualizar">
  <table class="table__agregar">
  <tr>
- <td>ISBN<input type="text" name="isbn" value="" size="40"/></td>
+ <td>ISBN<input type="text" name="isbn" id="isbn" value="" size="40" onclick="cambioColor(isbn)"/></td>
  </tr>
  <tr>
- <td>Titulo<input type="text" name="titulo" value="" size="50"/></td>
+ <td>Titulo<input type="text" name="titulo" id="titulo"value="" size="50"/></td>
  </tr>
  <tr>
-   <td>Autor<input type="text" name="autor" value="" size="50"/></td>
+   <td>Autor<input type="text" name="autor" id="autor" value="" size="50"/></td>
 </tr>
  <tr>
- <td>Anio<input type="text" name="anio" value="" size="30"/></td>
+ <td>Anio<input type="text" name="anio" id="anio" value="" size="30"/></td>
  </tr>
  <!--Agrega el listbox con las editoriales al formulario del crud de libros-->
  <%
@@ -56,6 +56,57 @@
  </table>
  </form>
 <br><br>
+
+<script>
+
+   function cambioColor(input){
+      input.style.borderColor="";
+   }
+</script>
+
+<script type="text/javascript">
+   document.addEventListener("DOMContentLoaded", function() {
+       document.getElementById("formCrear").addEventListener('submit', validarFormulario); 
+     });
+     
+     function validarFormulario(evento) {
+       evento.preventDefault();
+       var isbn = document.getElementById('isbn');
+       if(isbn.value.length == 0) {
+         alert('No has escrito nada en el ISBN');
+         isbn.style.borderColor="red";
+
+         return;
+       }
+       var valoresAceptados = /^[0-9]+$/;
+       if(isbn.value.match(valoresAceptados)==null) {
+         alert('El ISBN debe ser un numero');
+         isbn.style.borderColor="red";
+         return;
+       }
+       var titulo = document.getElementById('titulo');
+       if (titulo.value.length == 0) {
+         alert('No has ingresado el titulo');
+         titulo.style.borderColor="red";
+         return;
+       }
+       var autor = document.getElementById('autor');
+       if (autor.value.length == 0) {
+         alert('No has ingresado el autor');
+         autor.style.borderColor="red";
+         return;
+       }
+       var anio = document.getElementById('anio');
+       if (anio.value.match(valoresAceptados)==null) {
+         alert('Ingresa correctamente el año');
+         anio.style.borderColor="red";
+         return;
+       }
+
+       this.submit();
+     }
+   </script>
+
 <!--Agregando el formulario de busqueda-->
 <form name="formbusca" class="formbus" action="libros.jsp" method="get">
 <p>
