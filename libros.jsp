@@ -11,10 +11,22 @@
 <form action="matto.jsp" class="formagre" id="formCrear" method="post" name="Actualizar">
  <table class="table__agregar">
  <tr>
- <td>ISBN<input type="text" name="isbn" id="isbn" value="" size="40" onclick="cambioColor(isbn)"/></td>
- </tr>
- <tr>
- <td>Titulo<input type="text" name="titulo" id="titulo"value="" size="50"/></td>
+ <%
+ //Fragmento de codigo para obtener los parametros del url generado en la etiqueta actualizar de la tabla de libros
+String ls_isbnActualizar = request.getParameter("isbnActualizar");
+String ls_actionActualizar= request.getParameter("actionActualizar");
+String autofocus="";
+if(ls_isbnActualizar==null){
+   ls_isbnActualizar="";
+}else{
+   autofocus="autofocus";
+}
+
+out.println("<td>ISBN:<input type=\"text\" name=\"isbn\" id=\"isbn\" value=\""+ls_isbnActualizar+"\" size=\"40\" onclick=\"cambioColor(isbn)\" /></td>");
+out.println("<tr><td>Titulo<input type=\"text\" name=\"titulo\" id=\"titulo\" value=\"\" size=\"50\" "+autofocus+"/></td></tr>");
+
+ //<td>Titulo<input type="text" name="titulo" value="" size="50"/></td>
+ %>
  </tr>
  <tr>
    <td>Autor<input type="text" name="autor" id="autor" value="" size="50"/></td>
@@ -45,9 +57,17 @@
  }
  %>
  <tr>
-   <td> Action <input type="radio" name="Action" value="Actualizar" /> Actualizar
- <input type="radio" name="Action" value="Eliminar" /> Eliminar
- <input type="radio" name="Action" value="Crear" checked /> Crear
+   <td> Action<%
+   //codigo que selecciona el radioButton actualizar si se carga la página desde el boton actualizar de la tabla de libros
+   if(!(ls_actionActualizar==null)){
+      out.println("<input type=\"radio\" name=\"Action\" value=\"Actualizar\" id=\"actualizar\" checked/> Actualizar");
+      out.println("<input type=\"radio\" name=\"Action\" value=\"Crear\" id=\"crear\" /> Crear");
+   }else{
+      out.println("<input type=\"radio\" name=\"Action\" value=\"Actualizar\" id=\"actualizar\"/> Actualizar");
+      out.println("<input type=\"radio\" name=\"Action\" value=\"Crear\" id=\"crear\" checked/> Crear");
+   }
+   out.println("<input type=\"radio\" name=\"Action\" value=\"Eliminar\"/> Eliminar");
+   %>
   </td>
  <td><input type="SUBMIT" value="ACEPTAR" />
 </td>
@@ -207,7 +227,7 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
       out.println("<td class=\"td_especial\">"+rs.getString("autor")+"</td>");
       out.println("<td class=\"td_especial\">"+rs.getString("anio")+"</td>");
       out.println("<td class=\"td_especial\">"+rs.getString("editorial")+"</td>");
-      out.println("<td class=\"td_especial\">"+"Actualizar<br>a href=\"./matto.jsp"+urlEliminar+"\">Eliminar</a>"+"</td>");
+      out.println("<td class=\"td_especial\">"+"<a href=\"./libros.jsp?isbnActualizar="+rs_isbn+"&actionActualizar=y\">Actualizar</a><br>a href=\"./matto.jsp"+urlEliminar+"\">Eliminar</a>"+"</td>");
       out.println("</tr class=\"tr_especial\">>");
       i++;
    }
@@ -252,7 +272,7 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
          out.println("<td class=\"td_especial\">"+rs.getString("autor")+"</td>");
          out.println("<td class=\"td_especial\">"+rs.getString("anio")+"</td>");
          out.println("<td class=\"td_especial\">"+rs.getString("editorial")+"</td>");
-         out.println("<td class=\"td_especial\">"+"Actualizar<br><a href=\"./matto.jsp"+urlEliminar+"\">Eliminar</a>"+"</td>");
+         out.println("<td class=\"td_especial\">"+"<a href=\"./libros.jsp?isbnActualizar="+rs_isbn+"&actionActualizar=y\">Actualizar</a><br><a href=\"./matto.jsp"+urlEliminar+"\">Eliminar</a>"+"</td>");
          out.println("</tr class=\"tr_especial\">>");
          i++;
       }
