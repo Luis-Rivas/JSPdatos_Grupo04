@@ -191,6 +191,7 @@ System.out.println("Error: " + e);
 String ls_isbn = request.getParameter("isbn");
 String ls_titulo =request.getParameter("titulo");
 String ls_autor = request.getParameter("autor");
+String ls_consulta= request.getParameter("consulta");
 //Conexión a la base
 ServletContext context = request.getServletContext();
 String path = context.getRealPath("/data");
@@ -207,15 +208,37 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
    if((ls_isbn=="")||(ls_isbn==null)){
    ls_isbn="%";
    }
+   String ls_ordenarBusqueda= request.getParameter("ordenarBusqueda");
+   String ls_ordenadoBusqueda= request.getParameter("ordenadoBusqueda");
+   String consultaOrdenar;
+   String ordenadoB=ls_ordenadoBusqueda;
    //Creando la cadena string que se enviará para la consulta de busqueda
    String consulta = "select * from libros where isbn like'"+ls_isbn+"' and titulo like'%"+ls_titulo+"%' and autor like '%"+ls_autor+"%'";
+
+   if(!(ls_consulta==null))
+   {
+      consulta=ls_consulta;
+   }
+            //condicional para ordenar ascendente/descendente
+            if(!(ls_ordenarBusqueda==null)){
+         if(ordenadoB.equals("desc1")){
+            consulta+=" order by titulo desc";
+            ordenadoB = "asc1";
+         }else{
+         consulta += " order by titulo asc";
+         ordenadoB="desc1";
+         }
+      }else{
+         consulta += ";";
+      }
+
    Statement st = conexion.createStatement();
    ResultSet rs = st.executeQuery(consulta);
-   //out.print("<h2>Contenido del formulario: "+ls_titulo+"</h2>");
-   //out.print("<h2>Contenido del formulario: "+ls_isbn+"</h2>");
-   //out.print("<h3>"+consulta+"</h3>");
+
    // Ponemos los resultados en un table de html
-   out.println("<table border=\"1\" class=\"table__a\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
+   String urlTitulo1="<a href=./libros.jsp?titulo="+ls_titulo+"&isbn="+ls_isbn+"&autor="+ls_autor+"&buscar=BUSCAR&ordenarBusqueda="+ordenadoB+"&ordenadoBusqueda="+ordenadoB+">Titulo</a>";
+   out.println("<table border=\"1\"><tr><td>Num.</td><td>ISBN</td><td>"+urlTitulo1+"</td><td>Autor</td><td>Anio</td><td>Editorial</td><td>Acción</td></tr>");
+   //out.println("<table border=\"1\" class=\"table__a\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
    int i=1;
    while(rs.next()){
       rs_isbn = rs.getString("isbn");
@@ -227,7 +250,7 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
       out.println("<td class=\"td_especial\">"+rs.getString("autor")+"</td>");
       out.println("<td class=\"td_especial\">"+rs.getString("anio")+"</td>");
       out.println("<td class=\"td_especial\">"+rs.getString("editorial")+"</td>");
-      out.println("<td class=\"td_especial\">"+"<a href=\"./libros.jsp?isbnActualizar="+rs_isbn+"&actionActualizar=y\">Actualizar</a><br>a href=\"./matto.jsp"+urlEliminar+"\">Eliminar</a>"+"</td>");
+      out.println("<td class=\"td_especial\">"+"<a href=\"./libros.jsp?isbnActualizar="+rs_isbn+"&actionActualizar=y\">Actualizar</a><br><a href=\"./matto.jsp"+urlEliminar+"\">Eliminar</a>"+"</td>");
       out.println("</tr class=\"tr_especial\">>");
       i++;
    }
