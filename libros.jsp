@@ -178,6 +178,10 @@ Connection conexion = getConnection(path);
    if (!conexion.isClosed()){
 out.write("OK");
 
+
+String rs_isbn="";
+String urlEliminar="";
+
 if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
 
    if((ls_isbn=="")||(ls_isbn==null)){
@@ -194,14 +198,16 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
    out.println("<table border=\"1\" class=\"table__a\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
    int i=1;
    while(rs.next()){
+      rs_isbn = rs.getString("isbn");
+      urlEliminar = "?isbn="+rs_isbn+"&Action=Eliminar";
       out.println("<tr class=\"tr_especial\">");
       out.println("<td class=\"td_especial\">"+ i +"</td>");
-      out.println("<td class=\"td_especial\">"+rs.getString("isbn")+"</td>");
+      out.println("<td class=\"td_especial\">"+rs_isbn+"</td>");
       out.println("<td class=\"td_especial\">"+rs.getString("titulo")+"</td>");
       out.println("<td class=\"td_especial\">"+rs.getString("autor")+"</td>");
       out.println("<td class=\"td_especial\">"+rs.getString("anio")+"</td>");
       out.println("<td class=\"td_especial\">"+rs.getString("editorial")+"</td>");
-      out.println("<td class=\"td_especial\">"+"Actualizar<br>Eliminar"+"</td>");
+      out.println("<td class=\"td_especial\">"+"Actualizar<br>a href=\"./matto.jsp"+urlEliminar+"\">Eliminar</a>"+"</td>");
       out.println("</tr class=\"tr_especial\">>");
       i++;
    }
@@ -235,14 +241,18 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
       out.println("<table border=\"1\" class=\"table__a\"><tr><td>Num.</td><td>ISBN</td><td>"+urlTitulo+"</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
       int i=1;
       while(rs.next()){
+
+      rs_isbn = rs.getString("isbn");
+      urlEliminar = "?isbn="+rs_isbn+"&Action=Eliminar";
+
          out.println("<tr class=\"tr_especial\">");
          out.println("<td class=\"td_especial\">"+ i +"</td>");
-         out.println("<td class=\"td_especial\">"+rs.getString("isbn")+"</td>");
+         out.println("<td class=\"td_especial\">"+rs_isbn+"</td>");
          out.println("<td class=\"td_especial\">"+rs.getString("titulo")+"</td>");
          out.println("<td class=\"td_especial\">"+rs.getString("autor")+"</td>");
          out.println("<td class=\"td_especial\">"+rs.getString("anio")+"</td>");
          out.println("<td class=\"td_especial\">"+rs.getString("editorial")+"</td>");
-         out.println("<td class=\"td_especial\">"+"Actualizar<br>Eliminar"+"</td>");
+         out.println("<td class=\"td_especial\">"+"Actualizar<br><a href=\"./matto.jsp"+urlEliminar+"\">Eliminar</a>"+"</td>");
          out.println("</tr class=\"tr_especial\">>");
          i++;
       }
