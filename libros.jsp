@@ -210,11 +210,29 @@ if(!(ls_titulo==null) || !(ls_isbn==null) || !(ls_autor==null)){
    conexion.close();
 
 }else{
+
+      String ls_ordenar=request.getParameter("ordenar");
+      String ls_ordenado=request.getParameter("ordenado");
+      String ordenado=ls_ordenado;
+      String consulta = "select * from libros";
+      //Condicional para ordenar ascendente/descendente
+      if(!(ls_ordenar==null)){
+         if(ordenado.equals("desc")){
+            consulta="select * from libros order by titulo desc";
+            ordenado = "asc";
+         }else{
+         consulta = "select * from libros order by titulo";
+         ordenado="desc";
+         }
+      }else{
+         consulta = "select * from libros";
+      }
+      String urlTitulo="<a href=./libros.jsp?ordenar=si&ordenado="+ordenado+">Titulo"+ordenado+"</a>";
       Statement st = conexion.createStatement();
-      ResultSet rs = st.executeQuery("select * from libros" );
+      ResultSet rs = st.executeQuery(consulta);
 
       // Ponemos los resultados en un table de html
-      out.println("<table border=\"1\" class=\"table__a\"><tr><td>Num.</td><td>ISBN</td><td>Titulo</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
+      out.println("<table border=\"1\" class=\"table__a\"><tr><td>Num.</td><td>ISBN</td><td>"+urlTitulo+"</td><td>Autor</td><td>Año</td><td>Editorial</td><td>Acción</td></tr>");
       int i=1;
       while(rs.next()){
          out.println("<tr class=\"tr_especial\">");
